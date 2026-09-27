@@ -1,0 +1,93 @@
+@import '@fontsource/space-grotesk/500.css';
+@import '@fontsource/space-grotesk/600.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/500.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-line;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  body {
+    @apply bg-paper text-ink font-body antialiased;
+    font-feature-settings: 'ss01' 1;
+  }
+
+  ::selection {
+    background-color: #3a54e4;
+    color: #f5f3ee;
+  }
+
+  /* Visible keyboard focus state everywhere */
+  :focus-visible {
+    outline: 2px solid #3a54e4;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display font-medium tracking-tight text-ink;
+  }
+
+  /* Respect reduced-motion preference: neutralize scroll-driven and
+     entrance animations site-wide. Components also check this in JS
+     before registering GSAP/ScrollTrigger work. */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .chapter-eyebrow {
+    @apply font-mono text-xs text-ink-faint tracking-wide;
+  }
+
+  .btn-editorial {
+    @apply inline-flex items-center gap-2 rounded-full border border-ink/15 px-5 py-2.5
+           font-body text-sm font-medium text-ink transition-colors duration-300 ease-editorial
+           hover:border-accent hover:text-accent;
+  }
+}
+
+/* Custom scrollbar — thin, warm-toned, not the browser default */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f5f3ee;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #cbc3ac;
+  border-radius: 8px;
+  border: 2px solid #f5f3ee;
+}
+
+/* Prism token colors tuned to sit inside a warm-editorial dark code panel */
+.token.comment { color: #8a8470; }
+.token.punctuation { color: #b7b09a; }
+.token.property,
+.token.keyword,
+.token.tag { color: #7fa3f2; }
+.token.string,
+.token.attr-value { color: #9fd9a8; }
+.token.function,
+.token.class-name { color: #f2c17f; }
+.token.number,
+.token.boolean { color: #e59a7a; }
+.token.operator { color: #d7d2c2; }
